@@ -3,17 +3,13 @@
     <nav class="bar">
         <ul class="nav_links">
             <li><a href="{{route('home')}}">Home</a></li>
-            {{--            <li><a href="{{route('userpage')}}">User</a></li>--}}
-            {{--            <li><a href="{{route('buy')}}">Buy</a></li>--}}
-            {{--            <li><a href="{{route('basket')}}">Basket</a></li>--}}
-            {{--            <li><a href="{{route('logOut')}}">Logout</a></li>--}}
             @if(Auth::check())
                 {{--user is logged in--}}
                 <li><a href="{{route('userpage',['id'=>Auth::user()->id])}}">User</a></li>
                 <li><a href="{{route('buy')}}">Buy</a></li>
                 <li><a href="{{route('basket')}}">Basket</a></li>
                 <li><a href="{{route('logOut')}}">Logout</a></li>
-                @if(Auth::user()->isAdmin)
+                @if(Auth::user()->CheckRole(Auth::user()) == 'Admin' || Auth::user()->CheckRole(Auth::user()) == 'Moderator')
                     {{--user is also admin, and can access the adminpage--}}
                     <li><a href="/admin">Admin</a></li>
                 @endif

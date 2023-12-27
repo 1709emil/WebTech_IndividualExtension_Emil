@@ -27,17 +27,7 @@ class AdminController extends Controller
         $orders = Order::with('product')->get();
         $users = DB::table('users')->select('id','name','email','phoneNumber')->get();
         $products = Product::with('pictures')->get();
-        error_log($orders);
-        error_log($users);
-        error_log($products);
         return view('admin', ['data'=>[$orders,$users,$products]]);
-    }
-
-
-
-    public function updateStock($quantity, $value)
-    {
-
     }
 
     public function createProduct(Request $request)

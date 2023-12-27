@@ -16,11 +16,23 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'role_id');
+    }
 
-    public function isAdmin(){
-        if ($this->isAdmin == 1){
-            return true;
-        }else return false;
+    public function CheckRole($user){
+        $role = $user->role()->first();
+       switch ($role->name){
+           case 'Admin':
+               return 'Admin';
+           case 'Moderator':
+               return 'Moderator';
+            case 'User':
+                return 'User';
+           default:
+               return false;
+       }
 
     }
 

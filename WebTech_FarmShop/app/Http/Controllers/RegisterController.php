@@ -21,7 +21,6 @@ class RegisterController extends Controller
 
     public function retrieveUser(Request $request)
     {
-        error_log("hello");
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');

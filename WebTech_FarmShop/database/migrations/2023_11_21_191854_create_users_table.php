@@ -17,11 +17,18 @@ return new class extends Migration
             $table->string("email")->unique();
             $table->string("phoneNumber")->nullable();
             $table->string("password");
-            $table->boolean('isAdmin')->nullable();
+            $table->unsignedBigInteger("role_id")->nullable();
             $table->timestamps();
+        });
 
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string("name")->unique();
+            $table->timestamps();
         });
     }
+
+
 
     /**
      * Reverse the migrations.

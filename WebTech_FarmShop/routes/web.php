@@ -27,13 +27,17 @@ Route::get('/', function () {
     return view('homeController');
 });
 */
-Route::middleware(['adminAuth'])->group(function (){
-    Route::get('/admin', [AdminController::class,'getAdminPage'])->name("admin");
-    Route::delete('/admin/{id}', 'AdminController@destroy')->name('user.deleteUser');
+Route::middleware(['modAuth'])->group(function(){
     Route::post('AdminController/createProduct',[AdminController::class,'createProduct'])->name('createProduct');
     Route::post('/products/{id}', [AdminController::class, 'updateProduct'])->name('products.updateProduct');
     Route::delete('/delete-item/{name}', [AdminController::class, 'deleteProductByName']);
     Route::put('/update-stock/{id}','BasketController@updateQuantity');
+    Route::get('/admin', [AdminController::class,'getAdminPage'])->name("admin");
+});
+Route::middleware(['adminAuth'])->group(function (){
+    Route::delete('/admin/{id}', 'AdminController@destroy')->name('user.deleteUser');
+    
+   
 });
 
 Route::middleware(['auth'])->group(function (){

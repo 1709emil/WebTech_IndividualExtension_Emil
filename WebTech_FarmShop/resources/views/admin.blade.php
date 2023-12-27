@@ -12,7 +12,7 @@
 
 @section('main')
 
-
+    @if(Auth::user()->CheckRole(Auth::user()) == 'Admin')
     <div>
         {{--Window for showing all users in the system--}}
         <h1>User information</h1>
@@ -25,6 +25,7 @@
 
             </div>
     </div>
+    @endif
     <div>
         <div>
             {{--Window to add product--}}

@@ -114,15 +114,6 @@ class BasketController extends Controller
     }
 
 
-    public function hello()
-    {
-        return 'Hello World';
-    }
-
-    public function index()
-    {
-        return 'Hello World';
-    }
 
 
 }

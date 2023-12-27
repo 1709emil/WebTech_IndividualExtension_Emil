@@ -10,6 +10,7 @@ use App\Models\Picture;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\User;
+Use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,13 +23,32 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(2)->create();
         Stock::factory(6)->create();
+        
+        $role = new Role();
+        $role->name = "Admin";
+        $role->save();
+        $role2 = new Role();
+        $role2->name = "Moderator";
+        $role2->save();
+        $role3 = new Role();
+        $role3->name = "User";
+        $role3->save();
+
         $testUser = new User();
-        $testUser->name = "test";
-        $testUser->email = "test@test";
+        $testUser->name = "testAdmin";
+        $testUser->email = "testA@testA";
         $testUser->password = Hash::make("test");
+        $testUser->role_id = 1;
         $testUser->phoneNumber = "11";
-        $testUser->isAdmin = true;
         $testUser->save();
+
+        $testUser2 = new User();
+        $testUser2->name = "testMod";
+        $testUser2->email = "testM@testM";
+        $testUser2->password = Hash::make("test");
+        $testUser2->role_id = 2;
+        $testUser2->phoneNumber = "11";
+        $testUser2->save();
 
         $arr = ["roast", "steaks", "beef_sausages", "minced_beef", "potatoes", "beef_salami"];
         $productDescrip = ["The famous organic roast - you must taste this!", "Best steaks in Europe! Voted by local population!", "The greatest organic meat, made into sausages!", "Fresh, quality ground beef from a local farm, grass fed!", "Organic potatoes, grown right here on the farm!", "Salami, but made from a cow. Both healthier and tastier!"];
